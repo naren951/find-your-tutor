@@ -53,7 +53,7 @@ class _DoubtCardState extends State<DoubtCard> {
                 height: 5.0,
               ),
               Text(
-                "Tittle: ${widget.title}",
+                "Title: ${widget.title}",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,

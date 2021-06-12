@@ -45,7 +45,7 @@ class _DoubtCardState extends State<DoubtCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Tittle: ${widget.title}",
+                "Title: ${widget.title}",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,

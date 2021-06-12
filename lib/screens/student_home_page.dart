@@ -11,7 +11,7 @@ class StudentHomePage extends StatefulWidget {
 }
 
 class _StudentHomePageState extends State<StudentHomePage> {
-  int _selectedIndex = 1  ;
+  int _selectedIndex = 0  ;
 
   void _onItemTapped(int index) {
     setState(() {
