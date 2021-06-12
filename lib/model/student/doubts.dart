@@ -1,15 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:find_your_tutor/screens/welcome_page.dart';
-import 'doubt_card.dart';
-class Doubts extends StatefulWidget {
-  const Doubts({Key? key}) : super(key: key);
 
+import 'doubt_card.dart';
+Map<String, dynamic>? currentuser;
+User? loggedInUser;
+class Doubts extends StatefulWidget {
+
+  const Doubts({Key? key}) : super(key: key);
   @override
   _DoubtsState createState() => _DoubtsState();
 }
 
 class _DoubtsState extends State<Doubts> {
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
+
+  void getUser(){
+    loggedInUser = _auth.currentUser;
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUser();
+  }
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(stream: FirebaseFirestore.instance.collection('users').doc(loggedInUser!.uid).collection('doubts').snapshots(),

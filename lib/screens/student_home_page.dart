@@ -1,5 +1,5 @@
+import 'package:find_your_tutor/model/Student/add_doubts.dart';
 import 'package:find_your_tutor/model/student/doubts.dart';
-import 'package:find_your_tutor/model/tutor/add_doubts.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

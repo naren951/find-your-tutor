@@ -15,23 +15,23 @@ class AddDoubts extends StatefulWidget {
 }
 
 class _AddDoubtsState extends State<AddDoubts> {
-  FirebaseAuth _auth = FirebaseAuth.instance;
+
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
 
   Future<void> getUser() async {
+    FirebaseAuth _auth = FirebaseAuth.instance;
     testuser = _auth.currentUser;
     currentuser = await FirebaseFirestore.instance
         .collection('users')
         .doc(testuser!.uid)
         .get()
         .then((value) => value.data());
-    print("test");
   }
 
   CollectionReference doubts = FirebaseFirestore.instance
       .collection('users')
-      .doc(testuser!.uid)
+      .doc(testuser?.uid)
       .collection("doubts");
   @override
   void initState() {
