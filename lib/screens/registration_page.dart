@@ -1,6 +1,7 @@
 import 'package:find_your_tutor/constants/constants.dart';
 import 'package:find_your_tutor/constants/resuable_card.dart';
 import 'package:find_your_tutor/constants/rounded_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
@@ -14,6 +15,8 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
   bool showSpinner = false;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -23,6 +26,34 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _studyingController = TextEditingController();
   final _qualificationController = TextEditingController();
   String? roleSelected;
+
+  Future<void> registerUser(String email, String password, String role) async {
+    try {
+      final newUser = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      User? user = await _auth.currentUser;
+      if (!user!.emailVerified) {
+        await user.sendEmailVerification();
+      }
+      if (newUser != null) {
+        showTopSnackBar(
+          context,
+          CustomSnackBar.success(
+            message: "Registered successfully as a $role",
+          ),
+        );
+        role == "Student"
+            ? Navigator.pushNamed(context, STUDENT_DOUBT_SCREEN)
+            : null;
+        setState(() {
+          showSpinner = false;
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,13 +76,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
+                  CircleAvatar(
+                    radius: 100.0,
+                    backgroundImage: AssetImage('images/download.png'),
+                  ),
                   Center(
-                    child: Text(
-                      "Register!",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 40.0,
-                        fontWeight: FontWeight.w800,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 30.0),
+                      child: Text(
+                        "Sign Up!",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 40.0,
+                          fontWeight: FontWeight.w800,
+                        ),
                       ),
                     ),
                   ),
@@ -200,53 +238,50 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   SizedBox(
                     height: 30.0,
                   ),
-                  RoundedButton(
-                    colour: Colors.white,
-                    text: "Register!",
-                    onPressed: () async {
-                      // final email = _emailController.text.toString().trim();
-                      // final password =
-                      //     _passwordController.text.toString().trim();
-                      // final confirm =
-                      //     _confirmPassController.text.toString().trim();
-                      if (_nameController.text.isNotEmpty ||
-                          _emailController.text.isNotEmpty ||
-                          _passwordController.text.isNotEmpty ||
-                          _confirmPassController.text.isNotEmpty ||
-                          _phoneController.text.isNotEmpty ||
-                          _qualificationController.text.isNotEmpty ||
-                          _studyingController.text.isNotEmpty) {
-                        if (_confirmPassController.text.trim() !=
-                            _passwordController.text.trim()) {
-                          showTopSnackBar(
-                            context,
-                            CustomSnackBar.error(
-                              message: "Please enter the correct password",
-                            ),
-                          );
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 30.0),
+                    child: RoundedButton(
+                      colour: Colors.white,
+                      text: "Register!",
+                      onPressed: () async {
+                        final email = _emailController.text.toString().trim();
+                        final password =
+                            _passwordController.text.toString().trim();
+                        // final confirm =
+                        //      _confirmPassController.text.toString().trim();
+                        if (_nameController.text.isNotEmpty ||
+                            _emailController.text.isNotEmpty ||
+                            _passwordController.text.isNotEmpty ||
+                            _confirmPassController.text.isNotEmpty ||
+                            _phoneController.text.isNotEmpty ||
+                            _qualificationController.text.isNotEmpty ||
+                            _studyingController.text.isNotEmpty) {
+                          if (_confirmPassController.text.trim() !=
+                              _passwordController.text.trim()) {
+                            showTopSnackBar(
+                              context,
+                              CustomSnackBar.error(
+                                message: "Please enter the correct password",
+                              ),
+                            );
+                          } else {
+                            registerUser(email, password, roleSelected!);
+                            setState(
+                              () {
+                                showSpinner = true;
+                              },
+                            );
+                          }
                         } else {
                           showTopSnackBar(
                             context,
-                            CustomSnackBar.success(
-                              message:
-                                  "Registered successfully as a $roleSelected",
+                            CustomSnackBar.error(
+                              message: "Please fill in the details!",
                             ),
                           );
-                          setState(
-                            () {
-                              showSpinner = true;
-                            },
-                          );
                         }
-                      } else {
-                        showTopSnackBar(
-                          context,
-                          CustomSnackBar.error(
-                            message: "Please fill in the details!",
-                          ),
-                        );
-                      }
-                    },
+                      },
+                    ),
                   ),
                 ],
               ),

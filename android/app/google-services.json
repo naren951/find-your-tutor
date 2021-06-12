@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "912472353291",
+    "project_id": "find-your-tutor-30c21",
+    "storage_bucket": "find-your-tutor-30c21.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912472353291:android:cf8264950d88fcfe75f50e",
+        "android_client_info": {
+          "package_name": "com.turbo.find_your_tutor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "912472353291-336fbqip813to4pc5crkbqusd1m9lftd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0riqbMCSXY7-XofnktDxeFlGsylnTfm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "912472353291-336fbqip813to4pc5crkbqusd1m9lftd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
