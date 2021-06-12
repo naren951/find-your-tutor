@@ -77,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: <Widget>[
                   Center(
                     child: Text(
-                      "Login In",
+                      "Login",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 40.0,

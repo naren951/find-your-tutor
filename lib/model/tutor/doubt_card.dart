@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class DoubtCard extends StatefulWidget {
   final String title,name,description;
   DoubtCard({required this.title,required this.name, required this.description});
-
   @override
   _DoubtCardState createState() => _DoubtCardState();
 }

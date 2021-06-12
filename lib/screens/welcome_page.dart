@@ -20,7 +20,7 @@ class _WelcomePageState extends State<WelcomePage> {
       final user = _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
-        Navigator.pushNamed(context, STUDENT_HOME_PAGE);
+        // Navigator.pushNamed(context, STUDENT_HOME_PAGE);
       }
     } catch (e) {
       print(e);

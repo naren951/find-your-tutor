@@ -39,7 +39,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         showTopSnackBar(
           context,
           CustomSnackBar.success(
-            message: "Registered successfully as a $role",
+            message: "Registered successfully",
           ),
         );
         users.doc(newUser.user!.uid).set({'uid':newUser.user!.uid,

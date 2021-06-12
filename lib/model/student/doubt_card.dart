@@ -21,7 +21,6 @@ class _DoubtCardState extends State<DoubtCard> {
 
         child: Column(
           children: [
-            Text(widget.name),
             Text(widget.title),
             Text(widget.description),
           ],

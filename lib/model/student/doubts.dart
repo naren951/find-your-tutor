@@ -20,6 +20,11 @@ class _DoubtsState extends State<Doubts> {
               backgroundColor: Colors.blue,
             );
           }
+          if(snapshot.hasError){
+            return CircularProgressIndicator(
+              backgroundColor: Colors.blue,
+            );
+          }
           final doubtslist = snapshot.data!.docs;
           for(var element in doubtslist){
             doubts.add(DoubtCard(title: element['title'], name: element['name'], description: element['description']));

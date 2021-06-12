@@ -11,15 +11,15 @@ class StudentHomePage extends StatefulWidget {
 }
 
 class _StudentHomePageState extends State<StudentHomePage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1  ;
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
       if (_selectedIndex == 1) {
-        print(1);
+
       } else {
-        print(index);
+
       }
     });
   }
