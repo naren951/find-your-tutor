@@ -1,7 +1,10 @@
 import 'package:find_your_tutor/constants/constants.dart';
+import 'package:find_your_tutor/constants/resuable_card.dart';
 import 'package:find_your_tutor/constants/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -15,7 +18,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _nameController = TextEditingController();
-  final _roleSelected = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _confirmPassController = TextEditingController();
+  final _studyingController = TextEditingController();
+  final _qualificationController = TextEditingController();
   String? roleSelected;
   @override
   Widget build(BuildContext context) {
@@ -52,12 +58,60 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   SizedBox(
                     height: 30.0,
                   ),
+                  Row(children: [
+                    Expanded(
+                      child: ResuableCard(
+                        onPress: () {
+                          setState(() {
+                            roleSelected = "Tutor";
+                          });
+                        },
+                        colour:
+                            roleSelected == "Tutor" ? kCardColor1 : kCardColor2,
+                        cardChild: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text(
+                            "Tutor",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ResuableCard(
+                        onPress: () {
+                          setState(() {
+                            roleSelected = "Student";
+                          });
+                        },
+                        colour: roleSelected == "Student"
+                            ? kCardColor1
+                            : kCardColor2,
+                        cardChild: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text(
+                            "Student",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]),
+                  SizedBox(
+                    height: 30.0,
+                  ),
                   TextField(
                     controller: _nameController,
                     textAlign: TextAlign.center,
                     keyboardType: TextInputType.name,
                     decoration: kTextFieldDecoration.copyWith(
-                        labelText: "Enter your name",
+                        labelText: "Enter your full name",
                         labelStyle: TextStyle(
                           color: Colors.white,
                         )),
@@ -71,6 +125,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     keyboardType: TextInputType.emailAddress,
                     decoration: kTextFieldDecoration.copyWith(
                         labelText: "Enter your mail",
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        )),
+                  ),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  TextField(
+                    controller: _phoneController,
+                    textAlign: TextAlign.center,
+                    keyboardType: TextInputType.phone,
+                    decoration: kTextFieldDecoration.copyWith(
+                        labelText: "Enter your phone number",
                         labelStyle: TextStyle(
                           color: Colors.white,
                         )),
@@ -93,15 +160,82 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   SizedBox(
                     height: 30.0,
                   ),
+                  TextField(
+                    controller: _confirmPassController,
+                    obscureText: true,
+                    textAlign: TextAlign.center,
+                    decoration: kTextFieldDecoration.copyWith(
+                      labelText: "Confirm your password",
+                      labelStyle: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  roleSelected == 'Tutor'
+                      ? TextField(
+                          controller: _qualificationController,
+                          obscureText: true,
+                          textAlign: TextAlign.center,
+                          decoration: kTextFieldDecoration.copyWith(
+                            labelText: "Qualification",
+                            labelStyle: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        )
+                      : TextField(
+                          controller: _studyingController,
+                          obscureText: true,
+                          textAlign: TextAlign.center,
+                          decoration: kTextFieldDecoration.copyWith(
+                            labelText: "Studying in?",
+                            labelStyle: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                  SizedBox(
+                    height: 30.0,
+                  ),
                   RoundedButton(
                     colour: Colors.white,
-                    text: "Log In",
+                    text: "Register!",
                     onPressed: () async {
-                      setState(
-                        () {
-                          showSpinner = true;
-                        },
-                      );
+                      // final email = _emailController.text.toString().trim();
+                      // final password =
+                      //     _passwordController.text.toString().trim();
+                      // final confirm =
+                      //     _confirmPassController.text.toString().trim();
+                      if (_nameController.text.isNotEmpty ||
+                          _emailController.text.isNotEmpty ||
+                          _passwordController.text.isNotEmpty ||
+                          _confirmPassController.text.isNotEmpty ||
+                          _phoneController.text.isNotEmpty ||
+                          _qualificationController.text.isNotEmpty ||
+                          _studyingController.text.isNotEmpty) {
+                        showTopSnackBar(
+                          context,
+                          CustomSnackBar.success(
+                            message:
+                                "Registered successfully as a $roleSelected",
+                          ),
+                        );
+                        setState(
+                          () {
+                            showSpinner = true;
+                          },
+                        );
+                      } else {
+                        showTopSnackBar(
+                          context,
+                          CustomSnackBar.error(
+                            message: "Please fill in the details!",
+                          ),
+                        );
+                      }
                     },
                   ),
                 ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+
 const LOGIN_SCREEN = "/login_screen";
-const REGISTRATION_SCREEN="/registration_screen";
+const REGISTRATION_SCREEN = "/registration_screen";
 const kTextFieldDecoration = InputDecoration(
   fillColor: Colors.yellow,
   hintStyle: TextStyle(
@@ -23,3 +24,14 @@ const kTextFieldDecoration = InputDecoration(
     borderRadius: BorderRadius.all(Radius.circular(15.0)),
   ),
 );
+
+const Color kCardColor1 = Colors.black26;
+const Color kCardColor2 = Colors.blue;
+const kNumberTextStyle = TextStyle(fontSize: 50, fontWeight: FontWeight.w900);
+const kLabelTextStyle = TextStyle(
+  fontSize: 18,
+  color: Color(0xFF8D8E98),
+);
+
+const kLargeButtonTextStyle =
+    TextStyle(fontWeight: FontWeight.bold, fontSize: 25);
