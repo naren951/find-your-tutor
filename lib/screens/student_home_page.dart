@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class StudentHomePage extends StatefulWidget {
   const StudentHomePage({Key? key}) : super(key: key);
@@ -8,10 +9,52 @@ class StudentHomePage extends StatefulWidget {
 }
 
 class _StudentHomePageState extends State<StudentHomePage> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      if (_selectedIndex == 1) {
+        print(1);
+      } else {
+        print(index);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.pink,
+      appBar: AppBar(
+        title: Text("Student"),
+      ),
+      backgroundColor: Colors.white,
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.blue,
+        elevation: 20,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.questionCircle),
+            label: 'Doubts',
+            //backgroundColor: Colors.red,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.plusCircle),
+            label: 'Post',
+            //backgroundColor: Colors.teal,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.meetup),
+            label: 'Responses',
+            //backgroundColor: Colors.red,
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber,
+        selectedFontSize: 17,
+        unselectedItemColor: Colors.white,
+        onTap: _onItemTapped,
+      ),
     );
   }
 }
