@@ -1,4 +1,5 @@
-import 'package:find_your_tutor/model/add_doubts.dart';
+import 'package:find_your_tutor/model/student/doubts.dart';
+import 'package:find_your_tutor/model/tutor/add_doubts.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -29,7 +30,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
       appBar: AppBar(
         title: Text("Student"),
       ),
-      body: _selectedIndex == 1 ? AddDoubts() : null,
+      body: _selectedIndex == 1 ? AddDoubts() : Doubts(),
       backgroundColor: Colors.blue,
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.blue,

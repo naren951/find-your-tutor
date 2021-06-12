@@ -1,4 +1,4 @@
-import 'package:find_your_tutor/model/doubts.dart';
+import 'package:find_your_tutor/model/tutor/doubts.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class TutorHomePage extends StatefulWidget {

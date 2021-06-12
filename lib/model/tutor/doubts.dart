@@ -12,7 +12,6 @@ class _DoubtsState extends State<Doubts> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-DoubtCard(),
       ],
     );
   }
