@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_your_tutor/constants/constants.dart';
 import 'package:find_your_tutor/constants/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -25,8 +26,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _studyingController = TextEditingController();
   final _qualificationController = TextEditingController();
   String? roleSelected;
-
-  Future<void> registerUser(String email, String password) async {
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  Future<void> registerUser(String email, String password,String name,String phoneno) async {
     try {
       final newUser = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -41,7 +42,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             message: "Registered successfully as a $role",
           ),
         );
-
+        users.doc(newUser.user!.uid).set({'uid':newUser.user!.uid,
+          'name':name,'email':email,'phoneno':phoneno});
         Navigator.pushNamed(context, LOGIN_SCREEN);
         setState(() {
           showSpinner = false;
@@ -198,6 +200,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         final email = _emailController.text.toString().trim();
                         final password =
                             _passwordController.text.toString().trim();
+                        final name=_nameController.text.toString().trim();
+                        final phoneno=_phoneController.text.toString().trim();
                         // final confirm =
                         //      _confirmPassController.text.toString().trim();
                         if (_nameController.text.isNotEmpty ||
@@ -216,7 +220,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               ),
                             );
                           } else {
-                            registerUser(email, password);
+                            registerUser(email, password,name,phoneno);
                             setState(
                               () {
                                 showSpinner = true;

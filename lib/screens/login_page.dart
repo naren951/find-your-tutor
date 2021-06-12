@@ -1,5 +1,5 @@
 import 'package:find_your_tutor/constants/constants.dart';
-import 'package:find_your_tutor/constants/resuable_card.dart';
+import 'package:find_your_tutor/model/resuable_card.dart';
 import 'package:find_your_tutor/constants/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
