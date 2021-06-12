@@ -20,9 +20,9 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         elevation: 15.0,
         title: Text("Login Page"),
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.blue,
       ),
-      backgroundColor: Colors.teal,
+      backgroundColor: Colors.blue,
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
         opacity: 0.4,

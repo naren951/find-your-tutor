@@ -14,15 +14,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   bool showSpinner = false;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _roleSelected = TextEditingController();
+  String? roleSelected;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 15.0,
-        title: Text("Login Page"),
-        backgroundColor: Colors.teal,
+        title: Text("Registration Page"),
+        backgroundColor: Colors.blue,
       ),
-      backgroundColor: Colors.teal,
+      backgroundColor: Colors.blue,
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
         opacity: 0.4,
@@ -38,13 +41,26 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 children: <Widget>[
                   Center(
                     child: Text(
-                      "Login In",
+                      "Register!",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 40.0,
                         fontWeight: FontWeight.w800,
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  TextField(
+                    controller: _nameController,
+                    textAlign: TextAlign.center,
+                    keyboardType: TextInputType.name,
+                    decoration: kTextFieldDecoration.copyWith(
+                        labelText: "Enter your name",
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        )),
                   ),
                   SizedBox(
                     height: 30.0,
@@ -97,3 +113,5 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     );
   }
 }
+
+List<String> role = ["Student", "Tutor"];
