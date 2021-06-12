@@ -216,18 +216,28 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           _phoneController.text.isNotEmpty ||
                           _qualificationController.text.isNotEmpty ||
                           _studyingController.text.isNotEmpty) {
-                        showTopSnackBar(
-                          context,
-                          CustomSnackBar.success(
-                            message:
-                                "Registered successfully as a $roleSelected",
-                          ),
-                        );
-                        setState(
-                          () {
-                            showSpinner = true;
-                          },
-                        );
+                        if (_confirmPassController.text.trim() !=
+                            _passwordController.text.trim()) {
+                          showTopSnackBar(
+                            context,
+                            CustomSnackBar.error(
+                              message: "Please enter the correct password",
+                            ),
+                          );
+                        } else {
+                          showTopSnackBar(
+                            context,
+                            CustomSnackBar.success(
+                              message:
+                                  "Registered successfully as a $roleSelected",
+                            ),
+                          );
+                          setState(
+                            () {
+                              showSpinner = true;
+                            },
+                          );
+                        }
                       } else {
                         showTopSnackBar(
                           context,
