@@ -1,8 +1,10 @@
 import 'package:find_your_tutor/constants/constants.dart';
-import 'package:find_your_tutor/model/resuable_card.dart';
 import 'package:find_your_tutor/constants/rounded_button.dart';
+import 'package:find_your_tutor/model/resuable_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -76,13 +78,25 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Center(
-                    child: Text(
-                      "Login",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 40.0,
-                        fontWeight: FontWeight.w800,
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Login",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 40.0,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 15.0,
+                        ),
+                        Icon(
+                          FontAwesomeIcons.signInAlt,
+                          color: Colors.white,
+                        ),
+                      ],
                     ),
                   ),
                   Row(children: [
@@ -134,6 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 30.0,
                   ),
                   TextField(
+                    cursorColor: Colors.white,
                     controller: _emailController,
                     textAlign: TextAlign.center,
                     keyboardType: TextInputType.emailAddress,
@@ -147,6 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 20.0,
                   ),
                   TextField(
+                    cursorColor: Colors.white,
                     controller: _passwordController,
                     obscureText: true,
                     textAlign: TextAlign.center,

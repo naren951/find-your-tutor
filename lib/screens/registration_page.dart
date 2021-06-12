@@ -3,6 +3,7 @@ import 'package:find_your_tutor/constants/constants.dart';
 import 'package:find_your_tutor/constants/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -27,7 +28,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _qualificationController = TextEditingController();
   String? roleSelected;
   CollectionReference users = FirebaseFirestore.instance.collection('users');
-  Future<void> registerUser(String email, String password,String name,String phoneno) async {
+  Future<void> registerUser(
+      String email, String password, String name, String phoneno) async {
     try {
       final newUser = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -42,8 +44,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             message: "Registered successfully",
           ),
         );
-        users.doc(newUser.user!.uid).set({'uid':newUser.user!.uid,
-          'name':name,'email':email,'phoneno':phoneno});
+        users.doc(newUser.user!.uid).set({
+          'uid': newUser.user!.uid,
+          'name': name,
+          'email': email,
+          'phoneno': phoneno
+        });
         Navigator.pushNamed(context, LOGIN_SCREEN);
         setState(() {
           showSpinner = false;
@@ -83,13 +89,22 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   Center(
                     child: Padding(
                       padding: EdgeInsets.only(top: 30.0),
-                      child: Text(
-                        "Sign Up!",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 40.0,
-                          fontWeight: FontWeight.w800,
-                        ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Register",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 40.0,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          Icon(FontAwesomeIcons.registered),
+                        ],
                       ),
                     ),
                   ),
@@ -100,6 +115,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     height: 30.0,
                   ),
                   TextField(
+                    cursorColor: Colors.white,
                     controller: _nameController,
                     textAlign: TextAlign.center,
                     keyboardType: TextInputType.name,
@@ -113,6 +129,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     height: 30.0,
                   ),
                   TextField(
+                    cursorColor: Colors.white,
                     controller: _emailController,
                     textAlign: TextAlign.center,
                     keyboardType: TextInputType.emailAddress,
@@ -126,6 +143,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     height: 30.0,
                   ),
                   TextField(
+                    cursorColor: Colors.white,
                     controller: _phoneController,
                     textAlign: TextAlign.center,
                     keyboardType: TextInputType.phone,
@@ -139,6 +157,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     height: 20.0,
                   ),
                   TextField(
+                    cursorColor: Colors.white,
                     controller: _passwordController,
                     obscureText: true,
                     textAlign: TextAlign.center,
@@ -154,6 +173,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     height: 30.0,
                   ),
                   TextField(
+                    cursorColor: Colors.white,
                     controller: _confirmPassController,
                     obscureText: true,
                     textAlign: TextAlign.center,
@@ -167,30 +187,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   SizedBox(
                     height: 30.0,
                   ),
-                  roleSelected == 'Tutor'
-                      ? TextField(
-                          controller: _qualificationController,
-                          textAlign: TextAlign.center,
-                          decoration: kTextFieldDecoration.copyWith(
-                            labelText: "Qualification",
-                            labelStyle: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        )
-                      : TextField(
-                          controller: _studyingController,
-                          textAlign: TextAlign.center,
-                          decoration: kTextFieldDecoration.copyWith(
-                            labelText: "Studying in?",
-                            labelStyle: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                  SizedBox(
-                    height: 30.0,
-                  ),
                   Padding(
                     padding: EdgeInsets.only(bottom: 30.0),
                     child: RoundedButton(
@@ -200,8 +196,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         final email = _emailController.text.toString().trim();
                         final password =
                             _passwordController.text.toString().trim();
-                        final name=_nameController.text.toString().trim();
-                        final phoneno=_phoneController.text.toString().trim();
+                        final name = _nameController.text.toString().trim();
+                        final phoneno = _phoneController.text.toString().trim();
                         // final confirm =
                         //      _confirmPassController.text.toString().trim();
                         if (_nameController.text.isNotEmpty ||
@@ -220,7 +216,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               ),
                             );
                           } else {
-                            registerUser(email, password,name,phoneno);
+                            registerUser(email, password, name, phoneno);
                             setState(
                               () {
                                 showSpinner = true;
@@ -247,5 +243,3 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     );
   }
 }
-
-List<String> role = ["Student", "Tutor"];

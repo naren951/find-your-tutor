@@ -40,22 +40,28 @@ class _WelcomePageState extends State<WelcomePage> {
       appBar: AppBar(
         title: Center(child: Text("Find Your Tutor!")),
       ),
-      body: Align(
-        alignment: Alignment.bottomCenter,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            RoundedButton(
-              colour: Colors.white,
-              text: "Login",
-              onPressed: () => Navigator.pushNamed(context, LOGIN_SCREEN),
-            ),
-            RoundedButton(
+      body: Center(
+        child: Container(
+          constraints: BoxConstraints.expand(),
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("images/background-min.jpg"),
+                  fit: BoxFit.cover)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              RoundedButton(
                 colour: Colors.white,
-                text: "Register",
-                onPressed: () =>
-                    Navigator.pushNamed(context, REGISTRATION_SCREEN)),
-          ],
+                text: "Login",
+                onPressed: () => Navigator.pushNamed(context, LOGIN_SCREEN),
+              ),
+              RoundedButton(
+                  colour: Colors.white,
+                  text: "Register",
+                  onPressed: () =>
+                      Navigator.pushNamed(context, REGISTRATION_SCREEN)),
+            ],
+          ),
         ),
       ),
     );

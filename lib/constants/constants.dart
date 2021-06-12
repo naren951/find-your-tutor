@@ -7,6 +7,7 @@ const TUTOR_HOME_PAGE = "/tutor_home";
 
 const kTextFieldDecoration = InputDecoration(
   fillColor: Colors.yellow,
+  focusColor: Colors.black26,
   hintStyle: TextStyle(
     fontSize: 15,
     //fontWeight: FontWeight.bold,
