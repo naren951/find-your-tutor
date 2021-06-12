@@ -1,5 +1,4 @@
 import 'package:find_your_tutor/constants/constants.dart';
-import 'package:find_your_tutor/constants/resuable_card.dart';
 import 'package:find_your_tutor/constants/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +26,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _qualificationController = TextEditingController();
   String? roleSelected;
 
-  Future<void> registerUser(String email, String password, String role) async {
+  Future<void> registerUser(String email, String password) async {
     try {
       final newUser = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -42,9 +41,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             message: "Registered successfully as a $role",
           ),
         );
-        role == "Student"
-            ? Navigator.pushNamed(context, STUDENT_DOUBT_SCREEN)
-            : null;
+
+        Navigator.pushNamed(context, LOGIN_SCREEN);
         setState(() {
           showSpinner = false;
         });
@@ -96,51 +94,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   SizedBox(
                     height: 30.0,
                   ),
-                  Row(children: [
-                    Expanded(
-                      child: ResuableCard(
-                        onPress: () {
-                          setState(() {
-                            roleSelected = "Tutor";
-                          });
-                        },
-                        colour:
-                            roleSelected == "Tutor" ? kCardColor1 : kCardColor2,
-                        cardChild: Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text(
-                            "Tutor",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 30.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: ResuableCard(
-                        onPress: () {
-                          setState(() {
-                            roleSelected = "Student";
-                          });
-                        },
-                        colour: roleSelected == "Student"
-                            ? kCardColor1
-                            : kCardColor2,
-                        cardChild: Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Text(
-                            "Student",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 30.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ]),
                   SizedBox(
                     height: 30.0,
                   ),
@@ -215,7 +168,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   roleSelected == 'Tutor'
                       ? TextField(
                           controller: _qualificationController,
-                          obscureText: true,
                           textAlign: TextAlign.center,
                           decoration: kTextFieldDecoration.copyWith(
                             labelText: "Qualification",
@@ -226,7 +178,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         )
                       : TextField(
                           controller: _studyingController,
-                          obscureText: true,
                           textAlign: TextAlign.center,
                           decoration: kTextFieldDecoration.copyWith(
                             labelText: "Studying in?",
@@ -265,7 +216,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               ),
                             );
                           } else {
-                            registerUser(email, password, roleSelected!);
+                            registerUser(email, password);
                             setState(
                               () {
                                 showSpinner = true;

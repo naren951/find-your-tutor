@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 const LOGIN_SCREEN = "/login_screen";
 const REGISTRATION_SCREEN = "/registration_screen";
-const STUDENT_DOUBT_SCREEN = "/student_doubt_screen";
+const STUDENT_HOME_PAGE = "/student_home";
+const TUTOR_HOME_PAGE = "/tutor_home";
+
 const kTextFieldDecoration = InputDecoration(
   fillColor: Colors.yellow,
   hintStyle: TextStyle(

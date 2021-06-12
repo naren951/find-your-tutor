@@ -1,7 +1,11 @@
 import 'package:find_your_tutor/constants/constants.dart';
+import 'package:find_your_tutor/constants/resuable_card.dart';
 import 'package:find_your_tutor/constants/rounded_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -14,6 +18,41 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool showSpinner = false;
+  String? roleSelected;
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<void> userLogin(String email, String pass, String role) async {
+    try {
+      final newUser =
+          await _auth.signInWithEmailAndPassword(email: email, password: pass);
+      User? user = newUser.user;
+      if (user!.emailVerified) {
+        setState(() {
+          showSpinner = true;
+        });
+        Navigator.pushNamed(
+            context, role == "Tutor" ? TUTOR_HOME_PAGE : STUDENT_HOME_PAGE);
+        setState(() {
+          showSpinner = false;
+        });
+      } else {
+        showTopSnackBar(
+          context,
+          CustomSnackBar.error(
+            message: "Email not verified! Please verify your email address",
+          ),
+        );
+      }
+    } catch (e) {
+      showTopSnackBar(
+        context,
+        CustomSnackBar.error(
+          message: "Incorrect password",
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +85,51 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
+                  Row(children: [
+                    Expanded(
+                      child: ResuableCard(
+                        onPress: () {
+                          setState(() {
+                            roleSelected = "Tutor";
+                          });
+                        },
+                        colour:
+                            roleSelected == "Tutor" ? kCardColor1 : kCardColor2,
+                        cardChild: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text(
+                            "Tutor",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ResuableCard(
+                        onPress: () {
+                          setState(() {
+                            roleSelected = "Student";
+                          });
+                        },
+                        colour: roleSelected == "Student"
+                            ? kCardColor1
+                            : kCardColor2,
+                        cardChild: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text(
+                            "Student",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]),
                   SizedBox(
                     height: 30.0,
                   ),
@@ -81,11 +165,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     colour: Colors.white,
                     text: "Log In",
                     onPressed: () async {
-                      setState(
-                        () {
-                          showSpinner = true;
-                        },
-                      );
+                      final email = _emailController.text.toString().trim();
+                      final password =
+                          _passwordController.text.toString().trim();
+
+                      await userLogin(email, password, roleSelected!);
                     },
                   ),
                 ],

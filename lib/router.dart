@@ -1,6 +1,7 @@
 import 'package:find_your_tutor/screens/login_page.dart';
 import 'package:find_your_tutor/screens/registration_page.dart';
-import 'package:find_your_tutor/screens/student_doubt_page.dart';
+import 'package:find_your_tutor/screens/student_home_page.dart';
+import 'package:find_your_tutor/screens/tutor_home_page.dart';
 import 'package:find_your_tutor/screens/welcome_page.dart';
 import 'package:flutter/material.dart';
 
@@ -21,9 +22,13 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => RegistrationScreen(),
         );
-      case STUDENT_DOUBT_SCREEN:
+      case STUDENT_HOME_PAGE:
         return MaterialPageRoute(
-          builder: (_) => StudentDoubts(),
+          builder: (_) => StudentHomePage(),
+        );
+      case TUTOR_HOME_PAGE:
+        return MaterialPageRoute(
+          builder: (_) => TutorHomePage(),
         );
       default:
         return null!;
