@@ -63,27 +63,3 @@ class _DoubtsState extends State<Doubts> {
     });
   }
 }
-// return StreamBuilder<QuerySnapshot>(
-// stream: FirebaseFirestore.instance.collection('users').snapshots(),
-// builder: (BuildContext context,AsyncSnapshot<QuerySnapshot> snapshot) {
-// List<DoubtCard> doubts=[];
-// if(!snapshot.hasData){
-// return CircularProgressIndicator(
-// backgroundColor: Colors.blue,
-// );
-// }
-// final userList;
-//
-// snapshot.data!.docs.forEach((user) {
-// // print(user);
-// // user.collection('doubts').docs.forEach((doubt){
-// //   print(doubt['name']);
-// //   print(doubt['descrioption']);
-// });
-// // print(userList[0].data());
-// return ListView(
-// children: [
-// ],
-// );
-// }
-// );

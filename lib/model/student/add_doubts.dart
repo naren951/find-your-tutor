@@ -8,7 +8,6 @@ Map<String, dynamic>? currentuser;
 User? testuser;
 
 class AddDoubts extends StatefulWidget {
-  const AddDoubts({Key? key}) : super(key: key);
 
   @override
   _AddDoubtsState createState() => _AddDoubtsState();
@@ -24,7 +23,7 @@ class _AddDoubtsState extends State<AddDoubts> {
     testuser = _auth.currentUser;
     currentuser = await FirebaseFirestore.instance
         .collection('users')
-        .doc(testuser!.uid)
+        .doc(testuser?.uid)
         .get()
         .then((value) => value.data());
   }
@@ -90,6 +89,8 @@ class _AddDoubtsState extends State<AddDoubts> {
                       "uid":testuser?.uid
                     });
                   }
+                  _titleController.clear();
+                  _descriptionController.clear();
                 }
               ),
             ],

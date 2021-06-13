@@ -44,9 +44,8 @@ class _WelcomePageState extends State<WelcomePage> {
         child: Container(
           constraints: BoxConstraints.expand(),
           decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("images/background-min.jpg"),
-                  fit: BoxFit.cover)),
+          gradient: LinearGradient(colors: [Colors.greenAccent,Colors.lightBlue])
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

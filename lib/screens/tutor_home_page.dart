@@ -1,6 +1,7 @@
 import 'package:find_your_tutor/model/tutor/doubts.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:find_your_tutor/model/tutor/response.dart';
 class TutorHomePage extends StatefulWidget {
   const TutorHomePage({Key? key}) : super(key: key);
 
@@ -24,7 +25,7 @@ _currentIndex=1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Doubts(),
+      body: _selectedIndex==0?Doubts():Response(),
       appBar: AppBar(
         title: Center(child: Text("Tutor")),
       ),
@@ -41,7 +42,7 @@ _currentIndex=1;
             icon: Icon(
               FontAwesomeIcons.commentAlt,
             ),
-            label: 'Add',
+            label: 'Response',
             //backgroundColor: Colors.teal,
           ),
         ],
