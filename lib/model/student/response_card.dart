@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ResponseCard extends StatefulWidget {
-  final String? title,tutor;
-  ResponseCard({required this.title,required this.tutor});
+  final String? title, tutor;
+  ResponseCard({required this.title, required this.tutor});
 
   @override
   _ResponseCardState createState() => _ResponseCardState();
@@ -16,9 +16,9 @@ class _ResponseCardState extends State<ResponseCard> {
       child: Container(
         //padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.green.shade200,
           borderRadius: BorderRadius.circular(10.0),
-          border: Border.all(color: Colors.black45),
+          border: Border.all(color: Colors.green, width: 3.0),
           boxShadow: [
             BoxShadow(
               color: Colors.black26,

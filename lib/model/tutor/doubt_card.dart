@@ -14,6 +14,7 @@ class DoubtCard extends StatefulWidget {
 }
 
 class _DoubtCardState extends State<DoubtCard> {
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     CollectionReference response = FirebaseFirestore.instance
@@ -25,9 +26,9 @@ class _DoubtCardState extends State<DoubtCard> {
       child: Container(
         //padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.red.shade200,
           borderRadius: BorderRadius.circular(10.0),
-          border: Border.all(color: Colors.black45),
+          border: Border.all(color: Colors.red.shade100, width: 3.0),
           boxShadow: [
             BoxShadow(
               color: Colors.black26,
@@ -48,46 +49,59 @@ class _DoubtCardState extends State<DoubtCard> {
         ),
         child: Padding(
           padding: EdgeInsets.all(10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "Name: ${widget.name}",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Text(
-                "Title: ${widget.title}",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Text(
-                "Description: ${widget.description}",
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400,
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Name: ${widget.name}",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  Text(
+                    "Title: ${widget.title}",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  Text(
+                    "Description: ${widget.description}",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
               ),
               Checkbox(
-                  value: false,
-                  onChanged: (value) {
-                    if (value!) {
-                      response.add({
-                        'title': widget.title,
-                        'tutor': widget.tutor,
-                      });
-                    }
-                  })
+                activeColor: Colors.black,
+                value: isChecked,
+                onChanged: (value) {
+                  setState(() {
+                    isChecked = value!;
+                  });
+
+                  if (value!) {
+                    response.add({
+                      'title': widget.title,
+                      'tutor': widget.tutor,
+                    });
+                  } else {
+                    response.get().then((value) => value.docs.remove(value));
+                  }
+                },
+              )
             ],
           ),
         ),

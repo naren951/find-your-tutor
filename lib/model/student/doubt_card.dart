@@ -18,9 +18,9 @@ class _DoubtCardState extends State<DoubtCard> {
       child: Container(
         //padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.red.shade200,
           borderRadius: BorderRadius.circular(10.0),
-          border: Border.all(color: Colors.black45),
+          border: Border.all(color: Colors.red, width: 3.0),
           boxShadow: [
             BoxShadow(
               color: Colors.black26,
