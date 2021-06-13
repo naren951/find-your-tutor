@@ -80,14 +80,17 @@ class _AddDoubtsState extends State<AddDoubts> {
                 colour: Colors.white,
                 text: "Post",
                 onPressed: () async {
-                  doubts.add({
-                    "name": currentuser!['name'],
-                    "title": _titleController.text.toString().trim(),
-                    "description": _descriptionController.text.toString().trim()
-                  });
-                  _titleController.clear();
-                  _descriptionController.clear();
-                },
+                  if (_descriptionController.text.isNotEmpty &&
+                      _titleController.text.isNotEmpty) {
+                    doubts.add({
+                      "name": currentuser!['name'],
+                      "title": _titleController.text.toString().trim(),
+                      "description":
+                      _descriptionController.text.toString().trim(),
+                      "uid":testuser?.uid
+                    });
+                  }
+                }
               ),
             ],
           ),

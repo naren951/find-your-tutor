@@ -1,25 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class DoubtCard extends StatefulWidget {
-  final String title, name, description, uid, tutor;
-  DoubtCard(
-      {required this.title,
-      required this.name,
-      required this.description,
-      required this.uid,
-      required this.tutor});
+class ResponseCard extends StatefulWidget {
+  final String? title,tutor;
+  ResponseCard({required this.title,required this.tutor});
+
   @override
-  _DoubtCardState createState() => _DoubtCardState();
+  _ResponseCardState createState() => _ResponseCardState();
 }
 
-class _DoubtCardState extends State<DoubtCard> {
+class _ResponseCardState extends State<ResponseCard> {
   @override
   Widget build(BuildContext context) {
-    CollectionReference response = FirebaseFirestore.instance
-        .collection('users')
-        .doc(widget.uid)
-        .collection('response');
     return Padding(
       padding: EdgeInsets.all(5.0),
       child: Container(
@@ -52,16 +43,6 @@ class _DoubtCardState extends State<DoubtCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Name: ${widget.name}",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-              SizedBox(
-                height: 5.0,
-              ),
-              Text(
                 "Title: ${widget.title}",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -72,22 +53,12 @@ class _DoubtCardState extends State<DoubtCard> {
                 height: 5.0,
               ),
               Text(
-                "Description: ${widget.description}",
+                "Tutor: ${widget.tutor}",
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
                 ),
               ),
-              Checkbox(
-                  value: false,
-                  onChanged: (value) {
-                    if (value!) {
-                      response.add({
-                        'title': widget.title,
-                        'tutor': widget.tutor,
-                      });
-                    }
-                  })
             ],
           ),
         ),
